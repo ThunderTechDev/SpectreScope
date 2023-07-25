@@ -17,6 +17,10 @@ class RadarScene: SKScene {
         sprite.size = CGSize(width: 400, height: 400)
         sprite.position = CGPoint(x: 0, y: 0)
         self.addChild(sprite)
+        if let perturbation = SKEmitterNode(fileNamed: "Perturbation") {
+            perturbation.position = CGPoint(x: 0, y: 100)
+            self.addChild(perturbation)
+        }
     }
 
     override func update(_ currentTime: TimeInterval) {

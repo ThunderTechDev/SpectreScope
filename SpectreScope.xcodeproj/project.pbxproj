@@ -14,6 +14,8 @@
 		031602E42A6889830029E204 /* Radar.sks in Resources */ = {isa = PBXBuildFile; fileRef = 031602E32A6889830029E204 /* Radar.sks */; };
 		03941BC92A69D6D700A0C841 /* RadarScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03941BC82A69D6D700A0C841 /* RadarScene.swift */; };
 		03941BCB2A69DCAD00A0C841 /* Radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 03941BCA2A69DCAD00A0C841 /* Radar.png */; };
+		03AE12852A706B8C00EBCBEC /* Perturbation.sks in Resources */ = {isa = PBXBuildFile; fileRef = 03AE12832A706B8C00EBCBEC /* Perturbation.sks */; };
+		03AE12862A706B8C00EBCBEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03AE12842A706B8C00EBCBEC /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		031602E32A6889830029E204 /* Radar.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Radar.sks; sourceTree = "<group>"; };
 		03941BC82A69D6D700A0C841 /* RadarScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarScene.swift; sourceTree = "<group>"; };
 		03941BCA2A69DCAD00A0C841 /* Radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Radar.png; path = Resources/Radar.png; sourceTree = SOURCE_ROOT; };
+		03AE12832A706B8C00EBCBEC /* Perturbation.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Perturbation.sks; sourceTree = "<group>"; };
+		03AE12842A706B8C00EBCBEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,8 +91,10 @@
 			isa = PBXGroup;
 			children = (
 				031602D72A6886E60029E204 /* ContentView.swift */,
-				031602E32A6889830029E204 /* Radar.sks */,
 				03941BC82A69D6D700A0C841 /* RadarScene.swift */,
+				031602E32A6889830029E204 /* Radar.sks */,
+				03AE12832A706B8C00EBCBEC /* Perturbation.sks */,
+				03AE12842A706B8C00EBCBEC /* Assets.xcassets */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -166,9 +172,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03AE12852A706B8C00EBCBEC /* Perturbation.sks in Resources */,
 				031602DD2A6886E80029E204 /* Preview Assets.xcassets in Resources */,
 				031602DA2A6886E80029E204 /* Assets.xcassets in Resources */,
 				03941BCB2A69DCAD00A0C841 /* Radar.png in Resources */,
+				03AE12862A706B8C00EBCBEC /* Assets.xcassets in Resources */,
 				031602E42A6889830029E204 /* Radar.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
