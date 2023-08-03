@@ -5,51 +5,24 @@
 //  Created by Sergio Gonzalez Cristobal on 20/7/23.
 //
 
-import Foundation
-import CoreLocation
+import SwiftUI
 import SpriteKit
 import AVFoundation
 
-class CompassHeading: NSObject, CLLocationManagerDelegate {
-    var heading: Double = 0.0
-    var perturbation: SKEmitterNode?
-    
-    let locationManager = CLLocationManager()
-    
-    override init() {
-        super.init()
-        
-        locationManager.delegate = self
-        setupLocationManager()
-    }
-    
-    private func setupLocationManager() {
-        locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.headingAvailable() {
-            locationManager.startUpdatingHeading()
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        heading = newHeading.magneticHeading
-        
-        // Actualizar la posición de la perturbación
-        let angle = heading * (.pi / 180.0) // Convertir a radianes
-        let radius: CGFloat = 100 // Radio de la órbita de la perturbación
-        let x = radius * cos(CGFloat(angle))
-        let y = radius * sin(CGFloat(angle))
-        perturbation?.position = CGPoint(x: x, y: y)
-    }
-}
 
 class RadarScene: SKScene {
     let sprite = SKSpriteNode()
-    let compassHeading = CompassHeading()
-    var perturbation: SKEmitterNode?
+    var compassHeading: CompassHeading?
+    @ObservedObject var viewModel = RadarViewModel()
+    @Published var isPerturbationVisible: Bool = false
     var audioPlayer: AVAudioPlayer?
+    
+ 
 
     override func didMove(to view: SKView) {
+        
+        compassHeading = CompassHeading(viewModel: viewModel)
+        
         // Cargar las imágenes de la animación del radar
         let radarTextures = [
             SKTexture(imageNamed: "RadarAnimation01.png"),
@@ -68,8 +41,8 @@ class RadarScene: SKScene {
         // Crear acciones para hacer desaparecer y aparecer la perturbación
         let fadeOut = SKAction.fadeOut(withDuration: 0.2)
         let fadeIn = SKAction.fadeIn(withDuration: 0.2)
-        let hidePerturbation = SKAction.run { [weak self] in self?.perturbation?.run(fadeOut) }
-        let showPerturbation = SKAction.run { [weak self] in self?.perturbation?.run(fadeIn) }
+        let hidePerturbation = SKAction.run { [weak self] in self?.viewModel.perturbation?.run(fadeOut) }
+        let showPerturbation = SKAction.run { [weak self] in self?.viewModel.perturbation?.run(fadeIn) }
 
         // Crear una acción de espera
         let wait = SKAction.wait(forDuration: 1.0) // Esperar 1 segundo
@@ -94,10 +67,10 @@ class RadarScene: SKScene {
         addChild(sprite)
 
         if let perturbation = SKEmitterNode(fileNamed: "Perturbation") {
-            self.perturbation = perturbation
+            viewModel.perturbation = perturbation
             perturbation.position = CGPoint(x: 0, y: 100) // Inicia la perturbación en el borde del radar
             addChild(perturbation)
-            compassHeading.perturbation = perturbation // Asignar la perturbación al manejador de la brújula
+            //compassHeading.perturbation = perturbation // Asignar la perturbación al manejador de la brújula
         }
 
         if let url = Bundle.main.url(forResource: "Tap", withExtension: "wav") {
