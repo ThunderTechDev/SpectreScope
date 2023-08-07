@@ -16,28 +16,25 @@ class RadarScene: SKScene {
     @ObservedObject var viewModel = RadarViewModel()
     @Published var isPerturbationVisible: Bool = false
     var audioPlayer: AVAudioPlayer?
+    var texturesModel = TexturesModel()
     
  
+    // Provisional Labels
+    let decibelLevelLabel = SKLabelNode(fontNamed: "Arial")
+    let silenceDurationLabel = SKLabelNode(fontNamed: "Arial")
+    
 
     override func didMove(to view: SKView) {
         
+        
+      
+        
+        
         compassHeading = CompassHeading(viewModel: viewModel)
         
-        // Cargar las imágenes de la animación del radar
-        let radarTextures = [
-            SKTexture(imageNamed: "RadarAnimation01.png"),
-            SKTexture(imageNamed: "RadarAnimation02.png"),
-            SKTexture(imageNamed: "RadarAnimation03.png"),
-            SKTexture(imageNamed: "RadarAnimation04.png"),
-            SKTexture(imageNamed: "RadarAnimation05.png")
-        ]
-        
         // Crear una acción de animación
-        let radarAnimation = SKAction.animate(with: radarTextures, timePerFrame: 0.02)
+        let radarAnimation = SKAction.animate(with: texturesModel.radarTextures, timePerFrame: 0.02)
         
-        // Crear una acción para mostrar la textura final
-        let finalTexture = SKAction.setTexture(SKTexture(imageNamed: "Radar.png"))
-
         // Crear acciones para hacer desaparecer y aparecer la perturbación
         let fadeOut = SKAction.fadeOut(withDuration: 0.2)
         let fadeIn = SKAction.fadeIn(withDuration: 0.2)
@@ -54,10 +51,10 @@ class RadarScene: SKScene {
         }
 
         // Crear una secuencia de acciones: animación, mostrar textura final, ocultar perturbación, esperar, mostrar perturbación
-        let sequence = SKAction.sequence([showPerturbation, radarAnimation, hidePerturbation, playSound, finalTexture, wait])
+        let idleSequence = SKAction.sequence([hidePerturbation, radarAnimation, playSound, texturesModel.finalTexture, wait])
 
         // Crear una acción que repita la secuencia indefinidamente
-        let repeatAnimation = SKAction.repeatForever(sequence)
+        let repeatAnimation = SKAction.repeatForever(idleSequence)
 
         // Aplicar la acción al sprite
         sprite.run(repeatAnimation)
@@ -65,11 +62,28 @@ class RadarScene: SKScene {
         sprite.size = CGSize(width: 400, height: 400)
         sprite.position = CGPoint(x: 0, y: 0)
         addChild(sprite)
+        
+        //Provisional Labels
+        
+        // Configura y añade decibelLevelLabel
+        decibelLevelLabel.fontSize = 14
+        decibelLevelLabel.fontColor = .white
+        decibelLevelLabel.position = CGPoint(x: 0, y: 150) // Ajusta la posición según lo necesites
+        decibelLevelLabel.horizontalAlignmentMode = .left
+        addChild(decibelLevelLabel)
+
+        // Configura y añade silenceDurationLabel
+        silenceDurationLabel.fontSize = 14
+        silenceDurationLabel.fontColor = .white
+        silenceDurationLabel.position = CGPoint(x: 0, y: 130) // Ajusta la posición según lo necesites
+        silenceDurationLabel.horizontalAlignmentMode = .left
+        addChild(silenceDurationLabel)
 
         if let perturbation = SKEmitterNode(fileNamed: "Perturbation") {
             viewModel.perturbation = perturbation
             perturbation.position = CGPoint(x: 0, y: 100) // Inicia la perturbación en el borde del radar
             addChild(perturbation)
+            perturbation.isHidden = true
             //compassHeading.perturbation = perturbation // Asignar la perturbación al manejador de la brújula
         }
 
@@ -85,6 +99,11 @@ class RadarScene: SKScene {
 
     
     override func update(_ currentTime: TimeInterval) {
+        
+        // Actualizar las etiquetas con los valores actuales
+        decibelLevelLabel.text = String(format: "Nivel de decibelios: %.2f", viewModel.averageLevel)
+        silenceDurationLabel.text = "Duración del silencio: \(viewModel.silenceDuration)"
+        }
         // Updating the Scene
     }
-}
+

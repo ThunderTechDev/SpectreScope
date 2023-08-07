@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		031156C82A818DCF00A88D0F /* TexturesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031156C72A818DCF00A88D0F /* TexturesModel.swift */; };
 		031602D62A6886E60029E204 /* SpectreScopeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031602D52A6886E60029E204 /* SpectreScopeApp.swift */; };
 		031602D82A6886E60029E204 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031602D72A6886E60029E204 /* ContentView.swift */; };
 		031602DA2A6886E80029E204 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031602D92A6886E80029E204 /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		031156C72A818DCF00A88D0F /* TexturesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TexturesModel.swift; path = ../../../../../../TexturesModel.swift; sourceTree = "<group>"; };
 		031602D22A6886E60029E204 /* SpectreScope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpectreScope.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		031602D52A6886E60029E204 /* SpectreScopeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectreScopeApp.swift; sourceTree = "<group>"; };
 		031602D72A6886E60029E204 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		03941BC42A69D63C00A0C841 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				031156C72A818DCF00A88D0F /* TexturesModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03AAD8E32A7C52E8007997F3 /* CompassHeading.swift in Sources */,
+				031156C82A818DCF00A88D0F /* TexturesModel.swift in Sources */,
 				031602D82A6886E60029E204 /* ContentView.swift in Sources */,
 				03AAD8E12A7C4FCC007997F3 /* RadarViewModel.swift in Sources */,
 				031602D62A6886E60029E204 /* SpectreScopeApp.swift in Sources */,
@@ -358,6 +362,7 @@
 				DEVELOPMENT_TEAM = 6Z3S569SKT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "El microfono se usa para captar el nivel de sonido del ambiente";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -390,6 +395,7 @@
 				DEVELOPMENT_TEAM = 6Z3S569SKT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "El microfono se usa para captar el nivel de sonido del ambiente";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
