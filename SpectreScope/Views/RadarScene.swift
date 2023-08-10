@@ -41,7 +41,7 @@ class RadarScene: SKScene {
         let idleSequence = SKAction.sequence([
             SKAction.run { [weak self] in
                 self?.alarmAudioPlayer?.stop()
-                self?.tapAudioPlayer?.volume = 0.04
+                self?.tapAudioPlayer?.volume = 1.0
                 self?.tapAudioPlayer?.play()
             },
             radarAnimation,
@@ -108,7 +108,7 @@ class RadarScene: SKScene {
             SKAction.run { [weak self] in self?.viewModel.perturbation?.run(SKAction.fadeOut(withDuration: 0.2)) },
             SKAction.animate(with: texturesModel.radarTextures, timePerFrame: 0.02),
             SKAction.run { [weak self] in
-                self?.tapAudioPlayer?.volume = 0.04
+                self?.tapAudioPlayer?.volume = 1.0
                 self?.tapAudioPlayer?.play()
             },
             texturesModel.finalTexture,
@@ -135,9 +135,9 @@ class RadarScene: SKScene {
             SKAction.animate(with: texturesModel.radarTextures, timePerFrame: 0.02),
             SKAction.run { [weak self] in self?.viewModel.perturbation?.run(SKAction.fadeOut(withDuration: 0.2)) },
             SKAction.run { [weak self] in
-                self?.tapAudioPlayer?.volume = 0.04
+                self?.tapAudioPlayer?.volume = 1.0
                 self?.tapAudioPlayer?.play()
-                self?.alarmAudioPlayer?.volume = 0.03
+                self?.alarmAudioPlayer?.volume = 0.5
                 self?.alarmAudioPlayer?.play()
             },
             texturesModel.finalTexture,
