@@ -29,7 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		031156C72A818DCF00A88D0F /* TexturesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TexturesModel.swift; path = ../../../../../../TexturesModel.swift; sourceTree = "<group>"; };
+		031156C72A818DCF00A88D0F /* TexturesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TexturesModel.swift; sourceTree = "<group>"; };
 		031602D22A6886E60029E204 /* SpectreScope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpectreScope.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		031602D52A6886E60029E204 /* SpectreScopeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectreScopeApp.swift; sourceTree = "<group>"; };
 		031602D72A6886E60029E204 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -40,8 +40,8 @@
 		03941BCA2A69DCAD00A0C841 /* Radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Radar.png; path = Resources/Radar.png; sourceTree = SOURCE_ROOT; };
 		03A6696C2A79B1490080CC97 /* Alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Alarm.wav; sourceTree = "<group>"; };
 		03A6696F2A79B4ED0080CC97 /* Tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tap.wav; sourceTree = "<group>"; };
-		03AAD8E02A7C4FCC007997F3 /* RadarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RadarViewModel.swift; path = ../../../../../../RadarViewModel.swift; sourceTree = "<group>"; };
-		03AAD8E22A7C52E8007997F3 /* CompassHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CompassHeading.swift; path = ../../../../../../CompassHeading.swift; sourceTree = "<group>"; };
+		03AAD8E02A7C4FCC007997F3 /* RadarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarViewModel.swift; sourceTree = "<group>"; };
+		03AAD8E22A7C52E8007997F3 /* CompassHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassHeading.swift; sourceTree = "<group>"; };
 		03AE12832A706B8C00EBCBEC /* Perturbation.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Perturbation.sks; sourceTree = "<group>"; };
 		03AE12842A706B8C00EBCBEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03EB3B2D2A785B9F0080CD67 /* RadarAnimation04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RadarAnimation04.png; path = Resources/RadarAnimation04.png; sourceTree = SOURCE_ROOT; };

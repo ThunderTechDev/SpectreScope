@@ -126,6 +126,7 @@ class RadarScene: SKScene {
             let y = 0 + sin(angle) * 190
             print("La perturbación está en la posición: x - \(x); y - \(y)")
             viewModel.perturbation?.position = CGPoint(x: x, y: y)
+            viewModel.initialPerturbationAngle = angle // Guardar el ángulo inicial
             viewModel.isPerturbationPositionSet = true
         }
         viewModel.perturbation?.isHidden = false
