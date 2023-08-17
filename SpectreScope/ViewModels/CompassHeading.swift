@@ -41,9 +41,9 @@ class CompassHeading: NSObject, CLLocationManagerDelegate {
             let x = currentDistanceFromCenter * cos(adjustedAngle)
             let y = currentDistanceFromCenter * sin(adjustedAngle)
             viewModel.perturbation?.position = CGPoint(x: x, y: y)
-            //print("El ángulo inicial es \(viewModel.initialPerturbationAngle!)")
-            //print("El valor del heading del magnetómetro es \(heading)")
-            //print("El valor del angulo ajustado es \(adjustedAngle)")
+            print("El ángulo inicial es \(viewModel.initialPerturbationAngle!)")
+            print("El valor del heading del magnetómetro es \(heading)")
+            print("El valor del angulo ajustado es \(adjustedAngle)")
         }
     }
 }
