@@ -13,6 +13,7 @@ class CompassHeading: NSObject, CLLocationManagerDelegate {
     
     var heading: Double = 0.0
     var viewModel: RadarViewModel
+    var initialHeading: CLLocationDirection?
     
     let locationManager = CLLocationManager()
     
@@ -33,17 +34,24 @@ class CompassHeading: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        heading = newHeading.magneticHeading
-
+        // Guarda el primer valor de heading como referencia
+        if initialHeading == nil {
+            initialHeading = newHeading.magneticHeading
+        }
+        
+        // Calcula el cambio en el heading respecto al valor inicial
+        let headingChange = newHeading.magneticHeading - initialHeading!
+        
         if let initialAngle = viewModel.initialPerturbationAngle {
             let currentDistanceFromCenter: CGFloat = 190.0
-            let adjustedAngle = (initialAngle + (heading * (.pi / 180.0))).truncatingRemainder(dividingBy: 2 * .pi)
+            
+            // Aplica el cambio en el heading al ángulo inicial de la perturbación
+            let adjustedAngle = initialAngle + headingChange * (.pi / 180.0)
+            
             let x = currentDistanceFromCenter * cos(adjustedAngle)
             let y = currentDistanceFromCenter * sin(adjustedAngle)
+            
             viewModel.perturbation?.position = CGPoint(x: x, y: y)
-            print("El ángulo inicial es \(viewModel.initialPerturbationAngle!)")
-            print("El valor del heading del magnetómetro es \(heading)")
-            print("El valor del angulo ajustado es \(adjustedAngle)")
         }
     }
 }
