@@ -24,8 +24,16 @@ class RadarScene: SKScene {
     var cancellables: Set<AnyCancellable> = []
     
     override func didMove(to view: SKView) {
-        setupScene()
+        preloadTexturesAndSetupScene()
         observeViewModel()
+    }
+    
+    
+    func preloadTexturesAndSetupScene() {
+        SKTexture.preload(texturesModel.radarTextures + [texturesModel.finalTextureImage]) {
+            // Una vez que las texturas estén precargadas, ejecuta el setupScene
+            self.setupScene()
+        }
     }
     
     func setupScene() {

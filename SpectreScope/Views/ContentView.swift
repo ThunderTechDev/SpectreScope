@@ -11,6 +11,7 @@ import SpriteKit
 struct ContentView: View {
     var body: some View {
         
+        
         ZStack {
             
             Color.black
@@ -24,7 +25,7 @@ struct ContentView: View {
                         
             
             VStack {
-           
+                
                 Text("SpectreScope")
                     .font(Font.custom("Chalkduster", size: 50))
                     .fontWeight(.heavy)
@@ -32,11 +33,13 @@ struct ContentView: View {
                     .shadow(color: .gray, radius: 2, x: 2, y: 2)
                     .padding()
                 
-                SpriteView(scene: SKScene(fileNamed: "Radar.sks")!, options: [.allowsTransparency])
+                SpriteView(scene: SKScene(fileNamed: "Radar.sks")!, options:
+                    [.allowsTransparency])
                     .frame(width: 400, height: 400) // Modifica esto según tus necesidades
                     .cornerRadius(20)
                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.black, lineWidth: 4))
                     .cornerRadius(20)
+                
                     
             }
             
