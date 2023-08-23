@@ -26,25 +26,26 @@ class RadarScene: SKScene {
     override func didMove(to view: SKView) {
         preloadTexturesAndSetupScene()
         observeViewModel()
+        compassHeading = CompassHeading(viewModel: viewModel)
     }
     
     
     func preloadTexturesAndSetupScene() {
         SKTexture.preload(texturesModel.radarTextures + [texturesModel.finalTextureImage]) {
-            // Una vez que las texturas estén precargadas, ejecuta el setupScene
             self.setupScene()
         }
     }
     
     func setupScene() {
         
-        compassHeading = CompassHeading(viewModel: viewModel)
         
         sprite.size = CGSize(width: 400, height: 400)
         sprite.position = CGPoint(x: 0, y: 0)
         addChild(sprite)
+         
         
         let radarAnimation = SKAction.animate(with: texturesModel.radarTextures, timePerFrame: 0.02)
+        print( "Se está ejecutando instrucciones de la setup scene")
         
         let idleSequence = SKAction.sequence([
             SKAction.run { [weak self] in
@@ -62,14 +63,14 @@ class RadarScene: SKScene {
         
 
         
-        // Configura y añade decibelLevelLabel
+        // Label Noise Control
         decibelLevelLabel.fontSize = 14
         decibelLevelLabel.fontColor = .white
         decibelLevelLabel.position = CGPoint(x: 0, y: 150)
         decibelLevelLabel.horizontalAlignmentMode = .left
         addChild(decibelLevelLabel)
         
-        // Configura y añade silenceDurationLabel
+        // Label Silence Duration
         silenceDurationLabel.fontSize = 14
         silenceDurationLabel.fontColor = .white
         silenceDurationLabel.position = CGPoint(x: 0, y: 130)

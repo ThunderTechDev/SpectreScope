@@ -34,20 +34,18 @@ class CompassHeading: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        // Guarda el primer valor de heading como referencia
+
         if initialHeading == nil {
             initialHeading = newHeading.magneticHeading
         }
         
-        // Calcula el cambio en el heading respecto al valor inicial
+        
+    
         let headingChange = newHeading.magneticHeading - initialHeading!
         
         if let initialAngle = viewModel.initialPerturbationAngle {
             let currentDistanceFromCenter: CGFloat = 190.0
-            
-            // Aplica el cambio en el heading al ángulo inicial de la perturbación
             let adjustedAngle = initialAngle + headingChange * (.pi / 180.0)
-            
             let x = currentDistanceFromCenter * cos(adjustedAngle)
             let y = currentDistanceFromCenter * sin(adjustedAngle)
             

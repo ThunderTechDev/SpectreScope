@@ -42,7 +42,7 @@ class RadarViewModel: ObservableObject {
         averageLevel = accumulatedLevels.reduce(0, +) / Float(accumulatedLevels.count)
         accumulatedLevels.removeAll()
         
-        if averageLevel < -35 {
+        if averageLevel < -20 {
             silenceDuration += 1
         } else {
             silenceDuration = 0

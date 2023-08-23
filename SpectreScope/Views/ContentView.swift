@@ -35,7 +35,7 @@ struct ContentView: View {
                 
                 SpriteView(scene: SKScene(fileNamed: "Radar.sks")!, options:
                     [.allowsTransparency])
-                    .frame(width: 400, height: 400) // Modifica esto según tus necesidades
+                    .frame(width: 400, height: 400) 
                     .cornerRadius(20)
                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.black, lineWidth: 4))
                     .cornerRadius(20)
