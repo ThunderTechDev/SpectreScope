@@ -45,7 +45,6 @@ class RadarScene: SKScene {
          
         
         let radarAnimation = SKAction.animate(with: texturesModel.radarTextures, timePerFrame: 0.02)
-        print( "Se está ejecutando instrucciones de la setup scene")
         
         let idleSequence = SKAction.sequence([
             SKAction.run { [weak self] in
@@ -133,9 +132,8 @@ class RadarScene: SKScene {
             let angle = CGFloat.random(in: 0..<(2 * .pi))
             let x = 0 + cos(angle) * 190
             let y = 0 + sin(angle) * 190
-            print("La perturbación está en la posición: x - \(x); y - \(y)")
             viewModel.perturbation?.position = CGPoint(x: x, y: y)
-            viewModel.initialPerturbationAngle = angle // Guardar el ángulo inicial
+            viewModel.initialPerturbationAngle = angle
             viewModel.isPerturbationPositionSet = true
         }
         viewModel.perturbation?.isHidden = false
@@ -157,7 +155,7 @@ class RadarScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        decibelLevelLabel.text = String(format: "Nivel de decibelios: %.2f", viewModel.averageLevel)
-        silenceDurationLabel.text = "Duración del silencio: \(viewModel.silenceDuration)"
+        decibelLevelLabel.text = String(format: "Decibel Level: %.2f", viewModel.averageLevel)
+        silenceDurationLabel.text = "Silence Duration: \(viewModel.silenceDuration)"
     }
 }
