@@ -7,7 +7,7 @@
 
 import SwiftUI
 import AVFoundation
-import SpriteKit
+
 
 class RadarViewModel: ObservableObject {
     var engine = AVAudioEngine()
@@ -15,7 +15,6 @@ class RadarViewModel: ObservableObject {
     private var accumulatedLevels: [Float] = []
     private var processSoundLevelTimer: Timer?
     @Published var averageLevel: Float
-    @Published var perturbation: SKEmitterNode?
     @Published var shouldShowPerturbation: Bool = false
     @Published var initialPerturbationAngle: CGFloat?
     @Published var isPerturbationPositionSet: Bool = false

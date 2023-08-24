@@ -14,12 +14,15 @@ class CompassHeading: NSObject, CLLocationManagerDelegate {
     var heading: Double = 0.0
     var viewModel: RadarViewModel
     var initialHeading: CLLocationDirection?
-    
+    var perturbation: Perturbation
     let locationManager = CLLocationManager()
+    var initialAngle: CGFloat?
     
-    init(viewModel: RadarViewModel) {
-            self.viewModel = viewModel
-            super.init()
+    init(viewModel: RadarViewModel, perturbation: Perturbation) {
+        self.viewModel = viewModel
+        self.perturbation = perturbation
+        self.initialAngle = perturbation.angle
+        super.init()
         
         locationManager.delegate = self
         setupLocationManager()
@@ -33,23 +36,22 @@ class CompassHeading: NSObject, CLLocationManagerDelegate {
         }
     }
     
+ 
+    
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-
         if initialHeading == nil {
             initialHeading = newHeading.magneticHeading
         }
         
-        
-    
         let headingChange = newHeading.magneticHeading - initialHeading!
         
-        if let initialAngle = viewModel.initialPerturbationAngle {
+        if let initialAngle = self.initialAngle {
             let currentDistanceFromCenter: CGFloat = 190.0
             let adjustedAngle = initialAngle + headingChange * (.pi / 180.0)
             let x = currentDistanceFromCenter * cos(adjustedAngle)
             let y = currentDistanceFromCenter * sin(adjustedAngle)
             
-            viewModel.perturbation?.position = CGPoint(x: x, y: y)
+            perturbation.entity?.position = CGPoint(x: x, y: y)
         }
     }
 }

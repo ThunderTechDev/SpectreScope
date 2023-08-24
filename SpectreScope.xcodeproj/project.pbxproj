@@ -13,6 +13,7 @@
 		031602DA2A6886E80029E204 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031602D92A6886E80029E204 /* Assets.xcassets */; };
 		031602DD2A6886E80029E204 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031602DC2A6886E80029E204 /* Preview Assets.xcassets */; };
 		031602E42A6889830029E204 /* Radar.sks in Resources */ = {isa = PBXBuildFile; fileRef = 031602E32A6889830029E204 /* Radar.sks */; };
+		0387AB2F2A97F36000A6FED4 /* Perturbation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0387AB2E2A97F36000A6FED4 /* Perturbation.swift */; };
 		03941BC92A69D6D700A0C841 /* RadarScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03941BC82A69D6D700A0C841 /* RadarScene.swift */; };
 		03941BCB2A69DCAD00A0C841 /* Radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 03941BCA2A69DCAD00A0C841 /* Radar.png */; };
 		039E590A2A8EDDAB00D5F4D4 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 039E59092A8EDDAB00D5F4D4 /* Launch Screen.storyboard */; };
@@ -36,6 +37,7 @@
 		031602D92A6886E80029E204 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		031602DC2A6886E80029E204 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		031602E32A6889830029E204 /* Radar.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Radar.sks; sourceTree = "<group>"; };
+		0387AB2E2A97F36000A6FED4 /* Perturbation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Perturbation.swift; sourceTree = "<group>"; };
 		03941BC82A69D6D700A0C841 /* RadarScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarScene.swift; sourceTree = "<group>"; };
 		03941BCA2A69DCAD00A0C841 /* Radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Radar.png; path = Resources/Radar.png; sourceTree = SOURCE_ROOT; };
 		039E59092A8EDDAB00D5F4D4 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			children = (
 				03AAD8E02A7C4FCC007997F3 /* RadarViewModel.swift */,
 				03AAD8E22A7C52E8007997F3 /* CompassHeading.swift */,
+				0387AB2E2A97F36000A6FED4 /* Perturbation.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03AAD8E32A7C52E8007997F3 /* CompassHeading.swift in Sources */,
+				0387AB2F2A97F36000A6FED4 /* Perturbation.swift in Sources */,
 				031156C82A818DCF00A88D0F /* TexturesModel.swift in Sources */,
 				031602D82A6886E60029E204 /* ContentView.swift in Sources */,
 				03AAD8E12A7C4FCC007997F3 /* RadarViewModel.swift in Sources */,

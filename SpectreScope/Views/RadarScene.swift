@@ -17,7 +17,7 @@ class RadarScene: SKScene {
     var tapAudioPlayer: AVAudioPlayer?
     var alarmAudioPlayer: AVAudioPlayer?
     var texturesModel = TexturesModel()
-    
+    var perturbation = Perturbation()
     let decibelLevelLabel = SKLabelNode(fontNamed: "Arial")
     let silenceDurationLabel = SKLabelNode(fontNamed: "Arial")
     
@@ -26,9 +26,8 @@ class RadarScene: SKScene {
     override func didMove(to view: SKView) {
         preloadTexturesAndSetupScene()
         observeViewModel()
-        compassHeading = CompassHeading(viewModel: viewModel)
+        compassHeading = CompassHeading(viewModel: viewModel, perturbation: perturbation)
     }
-    
     
     func preloadTexturesAndSetupScene() {
         SKTexture.preload(texturesModel.radarTextures + [texturesModel.finalTextureImage]) {
@@ -37,13 +36,17 @@ class RadarScene: SKScene {
     }
     
     func setupScene() {
-        
-        
         sprite.size = CGSize(width: 400, height: 400)
         sprite.position = CGPoint(x: 0, y: 0)
         addChild(sprite)
-         
+
+        setupSound()
+        setupLabels()
         
+        setupIdleAnimation()
+    }
+    
+    func setupIdleAnimation() {
         let radarAnimation = SKAction.animate(with: texturesModel.radarTextures, timePerFrame: 0.02)
         
         let idleSequence = SKAction.sequence([
@@ -57,11 +60,28 @@ class RadarScene: SKScene {
             SKAction.wait(forDuration: 1.0)
         ])
         
-        
         sprite.run(SKAction.repeatForever(idleSequence))
-        
+    }
+    
+    func setupSound() {
+        if let tapURL = Bundle.main.url(forResource: "Tap", withExtension: "wav") {
+            do {
+                tapAudioPlayer = try AVAudioPlayer(contentsOf: tapURL)
+            } catch {
+                print("No se pudo cargar el archivo de sonido tap.wav.")
+            }
+        }
 
-        
+        if let alarmURL = Bundle.main.url(forResource: "Alarm", withExtension: "wav") {
+            do {
+                alarmAudioPlayer = try AVAudioPlayer(contentsOf: alarmURL)
+            } catch {
+                print("No se pudo cargar el archivo de sonido alarm.wav.")
+            }
+        }
+    }
+    
+    func setupLabels() {
         // Label Noise Control
         decibelLevelLabel.fontSize = 14
         decibelLevelLabel.fontColor = .white
@@ -75,29 +95,6 @@ class RadarScene: SKScene {
         silenceDurationLabel.position = CGPoint(x: 0, y: 130)
         silenceDurationLabel.horizontalAlignmentMode = .left
         addChild(silenceDurationLabel)
-        
-        if let perturbation = SKEmitterNode(fileNamed: "Perturbation") {
-            viewModel.perturbation = perturbation
-            perturbation.position = CGPoint(x: 0, y: 100)
-            addChild(perturbation)
-            perturbation.isHidden = true
-        }
-        
-        if let tapURL = Bundle.main.url(forResource: "Tap", withExtension: "wav") {
-                do {
-                    tapAudioPlayer = try AVAudioPlayer(contentsOf: tapURL)
-                } catch {
-                    print("No se pudo cargar el archivo de sonido tap.wav.")
-                }
-            }
-
-            if let alarmURL = Bundle.main.url(forResource: "Alarm", withExtension: "wav") {
-                do {
-                    alarmAudioPlayer = try AVAudioPlayer(contentsOf: alarmURL)
-                } catch {
-                    print("No se pudo cargar el archivo de sonido alarm.wav.")
-                }
-            }
     }
     
     func observeViewModel() {
@@ -112,45 +109,75 @@ class RadarScene: SKScene {
     
     func showIdleAnimation() {
         sprite.removeAllActions()
+        
+        let fadeOutPerturbation = SKAction.run { [weak self] in
+            self?.perturbation.entity?.run(SKAction.fadeOut(withDuration: 0.2))
+        }
+
+        let playTapSound = SKAction.run { [weak self] in
+            self?.tapAudioPlayer?.volume = 1.0
+            self?.tapAudioPlayer?.play()
+        }
+
+        let radarAnimation = SKAction.animate(with: texturesModel.radarTextures, timePerFrame: 0.02)
+        let waitAction = SKAction.wait(forDuration: 1.0)
+        
         let idleSequence = SKAction.sequence([
-            SKAction.run { [weak self] in self?.viewModel.perturbation?.run(SKAction.fadeOut(withDuration: 0.2)) },
-            SKAction.animate(with: texturesModel.radarTextures, timePerFrame: 0.02),
-            SKAction.run { [weak self] in
-                self?.tapAudioPlayer?.volume = 1.0
-                self?.tapAudioPlayer?.play()
-            },
+            fadeOutPerturbation,
+            radarAnimation,
+            playTapSound,
             texturesModel.finalTexture,
-            SKAction.wait(forDuration: 1.0)
+            waitAction
         ])
+
         sprite.run(SKAction.repeatForever(idleSequence))
     }
     
     func showPerturbationAnimation() {
+        // 1. Limpia las acciones anteriores.
         sprite.removeAllActions()
         
+        // 2. Configura la perturbación si es necesario.
         if !viewModel.isPerturbationPositionSet {
-            let angle = CGFloat.random(in: 0..<(2 * .pi))
-            let x = 0 + cos(angle) * 190
-            let y = 0 + sin(angle) * 190
-            viewModel.perturbation?.position = CGPoint(x: x, y: y)
-            viewModel.initialPerturbationAngle = angle
+            perturbation = Perturbation()
+            viewModel.initialPerturbationAngle = perturbation.angle
             viewModel.isPerturbationPositionSet = true
+            addChild(perturbation.entity!)
+            perturbation.entity?.position = perturbation.position
+            perturbation.entity?.isHidden = false
         }
-        viewModel.perturbation?.isHidden = false
         
+        // 3. Define las acciones individuales.
+        let fadeInPerturbation = SKAction.run { [weak self] in
+            self?.perturbation.entity?.run(SKAction.fadeIn(withDuration: 0.2))
+        }
+        
+        let fadeOutPerturbation = SKAction.run { [weak self] in
+            self?.perturbation.entity?.run(SKAction.fadeOut(withDuration: 0.2))
+        }
+        
+        let playSoundEffects = SKAction.run { [weak self] in
+            self?.tapAudioPlayer?.volume = 1.0
+            self?.tapAudioPlayer?.play()
+            self?.alarmAudioPlayer?.volume = 0.5
+            self?.alarmAudioPlayer?.play()
+        }
+        
+        let radarAnimation = SKAction.animate(with: texturesModel.radarTextures, timePerFrame: 0.02)
+        
+        let waitAction = SKAction.wait(forDuration: 1.0)
+
+        // 4. Combinar las acciones en una secuencia.
         let perturbationSequence = SKAction.sequence([
-            SKAction.run { [weak self] in self?.viewModel.perturbation?.run(SKAction.fadeIn(withDuration: 0.2)) },
-            SKAction.animate(with: texturesModel.radarTextures, timePerFrame: 0.02),
-            SKAction.run { [weak self] in self?.viewModel.perturbation?.run(SKAction.fadeOut(withDuration: 0.2)) },
-            SKAction.run { [weak self] in
-                self?.tapAudioPlayer?.volume = 1.0
-                self?.tapAudioPlayer?.play()
-                self?.alarmAudioPlayer?.volume = 0.5
-                self?.alarmAudioPlayer?.play()
-            },
+            fadeInPerturbation,
+            radarAnimation,
+            fadeOutPerturbation,
+            playSoundEffects,
             texturesModel.finalTexture,
-            SKAction.wait(forDuration: 1.0)
+            waitAction
         ])
+
+        // 5. Ejecuta la secuencia repetidamente.
         sprite.run(SKAction.repeatForever(perturbationSequence))
     }
     
