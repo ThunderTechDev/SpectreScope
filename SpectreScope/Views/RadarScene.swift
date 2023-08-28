@@ -27,6 +27,7 @@ class RadarScene: SKScene {
         preloadTexturesAndSetupScene()
         observeViewModel()
         compassHeading = CompassHeading(viewModel: viewModel, perturbation: perturbation)
+        //print("Ángulo inicial de la perturbación \(perturbation.angle)")
     }
     
     func preloadTexturesAndSetupScene() {
@@ -139,12 +140,12 @@ class RadarScene: SKScene {
         
         // 2. Configura la perturbación si es necesario.
         if !viewModel.isPerturbationPositionSet {
-            perturbation = Perturbation()
-            viewModel.initialPerturbationAngle = perturbation.angle
             viewModel.isPerturbationPositionSet = true
             addChild(perturbation.entity!)
             perturbation.entity?.position = perturbation.position
             perturbation.entity?.isHidden = false
+            
+            
         }
         
         // 3. Define las acciones individuales.
