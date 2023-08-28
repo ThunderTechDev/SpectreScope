@@ -18,6 +18,7 @@ class RadarViewModel: ObservableObject {
     @Published var shouldShowPerturbation: Bool = false
     @Published var initialPerturbationAngle: CGFloat?
     @Published var isPerturbationPositionSet: Bool = false
+    @Published var perturbationRadarDistance: CGFloat = 190.0
 
     init() {
         averageLevel = 0.0
@@ -50,6 +51,8 @@ class RadarViewModel: ObservableObject {
         
         if silenceDuration >= 15 {
             shouldShowPerturbation = true
+            perturbationRadarDistance = max(perturbationRadarDistance - 5, 0)
+            print("Distancia de la perturbacion \(perturbationRadarDistance)")
         } else {
             shouldShowPerturbation = false
         }

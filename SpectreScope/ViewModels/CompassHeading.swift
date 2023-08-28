@@ -46,8 +46,8 @@ class CompassHeading: NSObject, CLLocationManagerDelegate {
         let headingChange = newHeading.magneticHeading - initialHeading!
         
         if let initialAngle = self.initialAngle {
-            let currentDistanceFromCenter: CGFloat = 190.0
             let adjustedAngle = initialAngle + headingChange * (.pi / 180.0)
+            let currentDistanceFromCenter = viewModel.perturbationRadarDistance
             let x = currentDistanceFromCenter * cos(adjustedAngle)
             let y = currentDistanceFromCenter * sin(adjustedAngle)
             

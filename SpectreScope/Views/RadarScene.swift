@@ -143,6 +143,7 @@ class RadarScene: SKScene {
             viewModel.isPerturbationPositionSet = true
             addChild(perturbation.entity!)
             perturbation.entity?.position = perturbation.position
+            observeRadarDistanceViewModel()
             perturbation.entity?.isHidden = false
             
             
@@ -180,6 +181,16 @@ class RadarScene: SKScene {
 
         // 5. Ejecuta la secuencia repetidamente.
         sprite.run(SKAction.repeatForever(perturbationSequence))
+    }
+    
+    func observeRadarDistanceViewModel() {
+
+        viewModel.$perturbationRadarDistance.sink { [weak self] radarDistance in
+            // Actualizar la posición de la perturbación basada en el nuevo radarDistance.
+            let x = cos(self?.perturbation.angle ?? 0) * radarDistance
+            let y = sin(self?.perturbation.angle ?? 0) * radarDistance
+            self?.perturbation.entity?.position = CGPoint(x: x, y: y)
+        }.store(in: &cancellables)
     }
     
     override func update(_ currentTime: TimeInterval) {
