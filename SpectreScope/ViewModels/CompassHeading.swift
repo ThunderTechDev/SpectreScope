@@ -17,11 +17,13 @@ class CompassHeading: NSObject, CLLocationManagerDelegate {
     var perturbation: Perturbation
     let locationManager = CLLocationManager()
     var initialAngle: CGFloat?
+    weak var scene: RadarScene?
     
-    init(viewModel: RadarViewModel, perturbation: Perturbation) {
+    init(viewModel: RadarViewModel, perturbation: Perturbation, scene: RadarScene) {
         self.viewModel = viewModel
         self.perturbation = perturbation
         self.initialAngle = perturbation.angle
+        self.scene = scene
         super.init()
         
         locationManager.delegate = self
@@ -47,11 +49,8 @@ class CompassHeading: NSObject, CLLocationManagerDelegate {
         
         if let initialAngle = self.initialAngle {
             let adjustedAngle = initialAngle + headingChange * (.pi / 180.0)
-            let currentDistanceFromCenter = viewModel.perturbationRadarDistance
-            let x = currentDistanceFromCenter * cos(adjustedAngle)
-            let y = currentDistanceFromCenter * sin(adjustedAngle)
-            
-            perturbation.entity?.position = CGPoint(x: x, y: y)
+            scene?.currentPerturbationAngle = adjustedAngle
+               scene?.updatePerturbationPosition()
         }
     }
 }

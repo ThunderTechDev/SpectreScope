@@ -20,13 +20,15 @@ class RadarScene: SKScene {
     var perturbation = Perturbation()
     let decibelLevelLabel = SKLabelNode(fontNamed: "Arial")
     let silenceDurationLabel = SKLabelNode(fontNamed: "Arial")
+    var currentPerturbationAngle: CGFloat?
     
     var cancellables: Set<AnyCancellable> = []
     
     override func didMove(to view: SKView) {
         preloadTexturesAndSetupScene()
         observeViewModel()
-        compassHeading = CompassHeading(viewModel: viewModel, perturbation: perturbation)
+        observeRadarDistanceViewModel()
+        compassHeading = CompassHeading(viewModel: viewModel, perturbation: perturbation, scene: self)
         //print("Ángulo inicial de la perturbación \(perturbation.angle)")
     }
     
@@ -142,8 +144,8 @@ class RadarScene: SKScene {
         if !viewModel.isPerturbationPositionSet {
             viewModel.isPerturbationPositionSet = true
             addChild(perturbation.entity!)
-            perturbation.entity?.position = perturbation.position
-            observeRadarDistanceViewModel()
+            //perturbation.entity?.position = perturbation.position
+            //observeRadarDistanceViewModel()
             perturbation.entity?.isHidden = false
             
             
@@ -183,13 +185,15 @@ class RadarScene: SKScene {
         sprite.run(SKAction.repeatForever(perturbationSequence))
     }
     
-    func observeRadarDistanceViewModel() {
+    func updatePerturbationPosition() {
+        let x = cos(currentPerturbationAngle ?? 0) * viewModel.perturbationRadarDistance
+        let y = sin(currentPerturbationAngle ?? 0) * viewModel.perturbationRadarDistance
+        perturbation.entity?.position = CGPoint(x: x, y: y)
+    }
 
-        viewModel.$perturbationRadarDistance.sink { [weak self] radarDistance in
-            // Actualizar la posición de la perturbación basada en el nuevo radarDistance.
-            let x = cos(self?.perturbation.angle ?? 0) * radarDistance
-            let y = sin(self?.perturbation.angle ?? 0) * radarDistance
-            self?.perturbation.entity?.position = CGPoint(x: x, y: y)
+    func observeRadarDistanceViewModel() {
+        viewModel.$perturbationRadarDistance.sink { [weak self] _ in
+            self?.updatePerturbationPosition()
         }.store(in: &cancellables)
     }
     
