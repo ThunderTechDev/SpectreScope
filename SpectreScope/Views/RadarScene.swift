@@ -70,6 +70,7 @@ class RadarScene: SKScene {
         if let tapURL = Bundle.main.url(forResource: "Tap", withExtension: "wav") {
             do {
                 tapAudioPlayer = try AVAudioPlayer(contentsOf: tapURL)
+                alarmAudioPlayer?.enableRate = true
             } catch {
                 print("No se pudo cargar el archivo de sonido tap.wav.")
             }
@@ -196,6 +197,8 @@ class RadarScene: SKScene {
             self?.updatePerturbationPosition()
         }.store(in: &cancellables)
     }
+    
+   
     
     override func update(_ currentTime: TimeInterval) {
         decibelLevelLabel.text = String(format: "Decibel Level: %.2f", viewModel.averageLevel)
