@@ -16,6 +16,8 @@ class RadarScene: SKScene {
     var viewModel = RadarViewModel()
     var tapAudioPlayer: AVAudioPlayer?
     var alarmAudioPlayer: AVAudioPlayer?
+    var alarm2AudioPlayer: AVAudioPlayer?
+    var alarm3AudioPlayer: AVAudioPlayer?
     var texturesModel = TexturesModel()
     var perturbation = Perturbation()
     let decibelLevelLabel = SKLabelNode(fontNamed: "Arial")
@@ -83,6 +85,22 @@ class RadarScene: SKScene {
                 print("No se pudo cargar el archivo de sonido alarm.wav.")
             }
         }
+        
+        if let alarm2URL = Bundle.main.url(forResource: "Alarm2", withExtension: "wav") {
+               do {
+                   alarm2AudioPlayer = try AVAudioPlayer(contentsOf: alarm2URL)
+               } catch {
+                   print("No se pudo cargar el archivo de sonido Alarm2.wav.")
+               }
+           }
+
+           if let alarm3URL = Bundle.main.url(forResource: "Alarm3", withExtension: "wav") {
+               do {
+                   alarm3AudioPlayer = try AVAudioPlayer(contentsOf: alarm3URL)
+               } catch {
+                   print("No se pudo cargar el archivo de sonido Alarm3.wav.")
+               }
+           }
     }
     
     func setupLabels() {
@@ -138,19 +156,18 @@ class RadarScene: SKScene {
     }
     
     func showPerturbationAnimation() {
-        // 1. Limpia las acciones anteriores.
         sprite.removeAllActions()
         
-        // 2. Configura la perturbación si es necesario.
-        if !viewModel.isPerturbationPositionSet {
+        
+        if !viewModel.isPerturbationPositionSet && viewModel.perturbationAlreadyShowed == false {
             viewModel.isPerturbationPositionSet = true
             addChild(perturbation.entity!)
-            //perturbation.entity?.position = perturbation.position
-            //observeRadarDistanceViewModel()
             perturbation.entity?.isHidden = false
-            
-            
+        } else if !viewModel.isPerturbationPositionSet && viewModel.perturbationAlreadyShowed == true {
+            viewModel.isPerturbationPositionSet = true
+            viewModel.perturbationRadarDistance = 190.0
         }
+        
         
         // 3. Define las acciones individuales.
         let fadeInPerturbation = SKAction.run { [weak self] in
@@ -164,8 +181,24 @@ class RadarScene: SKScene {
         let playSoundEffects = SKAction.run { [weak self] in
             self?.tapAudioPlayer?.volume = 1.0
             self?.tapAudioPlayer?.play()
-            self?.alarmAudioPlayer?.volume = 0.5
-            self?.alarmAudioPlayer?.play()
+
+            let radarDistance = self?.viewModel.perturbationRadarDistance ?? 190.0
+            if radarDistance <= 45 {
+                self?.alarmAudioPlayer?.stop()
+                self?.alarm2AudioPlayer?.stop()
+                self?.alarm3AudioPlayer?.volume = 0.5
+                self?.alarm3AudioPlayer?.play()
+            } else if radarDistance <= 95 {
+                self?.alarmAudioPlayer?.stop()
+                self?.alarm3AudioPlayer?.stop()
+                self?.alarm2AudioPlayer?.volume = 0.5
+                self?.alarm2AudioPlayer?.play()
+            } else {
+                self?.alarm2AudioPlayer?.stop()
+                self?.alarm3AudioPlayer?.stop()
+                self?.alarmAudioPlayer?.volume = 0.5
+                self?.alarmAudioPlayer?.play()
+            }
         }
         
         let radarAnimation = SKAction.animate(with: texturesModel.radarTextures, timePerFrame: 0.02)
@@ -191,6 +224,7 @@ class RadarScene: SKScene {
         let y = sin(currentPerturbationAngle ?? 0) * viewModel.perturbationRadarDistance
         perturbation.entity?.position = CGPoint(x: x, y: y)
     }
+    
 
     func observeRadarDistanceViewModel() {
         viewModel.$perturbationRadarDistance.sink { [weak self] _ in

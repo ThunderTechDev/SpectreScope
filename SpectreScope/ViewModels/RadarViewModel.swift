@@ -14,6 +14,7 @@ class RadarViewModel: ObservableObject {
     var silenceDuration: TimeInterval = 0
     private var accumulatedLevels: [Float] = []
     private var processSoundLevelTimer: Timer?
+    @Published var perturbationAlreadyShowed = false
     @Published var averageLevel: Float
     @Published var shouldShowPerturbation: Bool = false
     @Published var initialPerturbationAngle: CGFloat?
@@ -51,6 +52,7 @@ class RadarViewModel: ObservableObject {
         
         if silenceDuration >= 15 {
             shouldShowPerturbation = true
+            perturbationAlreadyShowed = true
             perturbationRadarDistance = max(perturbationRadarDistance - 5, 0)
             print("Distancia de la perturbacion \(perturbationRadarDistance)")
         } else {
