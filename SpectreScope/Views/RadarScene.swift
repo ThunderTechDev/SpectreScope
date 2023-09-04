@@ -166,6 +166,15 @@ class RadarScene: SKScene {
         } else if !viewModel.isPerturbationPositionSet && viewModel.perturbationAlreadyShowed == true {
             viewModel.isPerturbationPositionSet = true
             viewModel.perturbationRadarDistance = 190.0
+     
+            let randomAngle = CGFloat.random(in: 0...2 * .pi) // Ángulo aleatorio entre 0 y 360 grados
+               perturbation.angle = randomAngle
+               compassHeading!.resetInitialAngle(to: randomAngle)
+            
+            let adjustedAngle = randomAngle + CGFloat(compassHeading!.lastHeadingChange) * (.pi / 180.0)
+                currentPerturbationAngle = adjustedAngle
+                updatePerturbationPosition()
+            
         }
         
         
@@ -220,9 +229,11 @@ class RadarScene: SKScene {
     }
     
     func updatePerturbationPosition() {
+
         let x = cos(currentPerturbationAngle ?? 0) * viewModel.perturbationRadarDistance
         let y = sin(currentPerturbationAngle ?? 0) * viewModel.perturbationRadarDistance
         perturbation.entity?.position = CGPoint(x: x, y: y)
+
     }
     
 
