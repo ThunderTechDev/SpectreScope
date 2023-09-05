@@ -18,6 +18,7 @@ class RadarScene: SKScene {
     var alarmAudioPlayer: AVAudioPlayer?
     var alarm2AudioPlayer: AVAudioPlayer?
     var alarm3AudioPlayer: AVAudioPlayer?
+    var whispersAudioPlayer: AVAudioPlayer?
     var texturesModel = TexturesModel()
     var perturbation = Perturbation()
     let decibelLevelLabel = SKLabelNode(fontNamed: "Arial")
@@ -69,6 +70,15 @@ class RadarScene: SKScene {
     }
     
     func setupSound() {
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Error al configurar AVAudioSession:", error)
+        }
+
+        
         if let tapURL = Bundle.main.url(forResource: "Tap", withExtension: "wav") {
             do {
                 tapAudioPlayer = try AVAudioPlayer(contentsOf: tapURL)
@@ -77,7 +87,7 @@ class RadarScene: SKScene {
                 print("No se pudo cargar el archivo de sonido tap.wav.")
             }
         }
-
+        
         if let alarmURL = Bundle.main.url(forResource: "Alarm", withExtension: "wav") {
             do {
                 alarmAudioPlayer = try AVAudioPlayer(contentsOf: alarmURL)
@@ -87,20 +97,29 @@ class RadarScene: SKScene {
         }
         
         if let alarm2URL = Bundle.main.url(forResource: "Alarm2", withExtension: "wav") {
-               do {
-                   alarm2AudioPlayer = try AVAudioPlayer(contentsOf: alarm2URL)
-               } catch {
-                   print("No se pudo cargar el archivo de sonido Alarm2.wav.")
-               }
-           }
-
-           if let alarm3URL = Bundle.main.url(forResource: "Alarm3", withExtension: "wav") {
-               do {
-                   alarm3AudioPlayer = try AVAudioPlayer(contentsOf: alarm3URL)
-               } catch {
-                   print("No se pudo cargar el archivo de sonido Alarm3.wav.")
-               }
-           }
+            do {
+                alarm2AudioPlayer = try AVAudioPlayer(contentsOf: alarm2URL)
+            } catch {
+                print("No se pudo cargar el archivo de sonido Alarm2.wav.")
+            }
+        }
+        
+        if let alarm3URL = Bundle.main.url(forResource: "Alarm3", withExtension: "wav") {
+            do {
+                alarm3AudioPlayer = try AVAudioPlayer(contentsOf: alarm3URL)
+            } catch {
+                print("No se pudo cargar el archivo de sonido Alarm3.wav.")
+            }
+        }
+        
+        if let whispersURL = Bundle.main.url(forResource: "Whispers", withExtension: "wav") {
+            do {
+                whispersAudioPlayer = try AVAudioPlayer(contentsOf: whispersURL)
+                whispersAudioPlayer?.numberOfLoops = -1
+            } catch {
+                print("No se pudo cargar el archivo de sonido Whispers.wav.")
+            }
+        }
     }
     
     func setupLabels() {
@@ -151,6 +170,9 @@ class RadarScene: SKScene {
             texturesModel.finalTexture,
             waitAction
         ])
+        
+        whispersAudioPlayer?.stop()
+        whispersAudioPlayer?.volume = 0
 
         sprite.run(SKAction.repeatForever(idleSequence))
     }
@@ -164,8 +186,10 @@ class RadarScene: SKScene {
             addChild(perturbation.entity!)
             perturbation.entity?.isHidden = false
         } else if !viewModel.isPerturbationPositionSet && viewModel.perturbationAlreadyShowed == true {
+ 
             viewModel.isPerturbationPositionSet = true
             viewModel.perturbationRadarDistance = 190.0
+        
      
             let randomAngle = CGFloat.random(in: 0...2 * .pi) // Ángulo aleatorio entre 0 y 360 grados
                perturbation.angle = randomAngle
@@ -202,9 +226,16 @@ class RadarScene: SKScene {
                 self?.alarm3AudioPlayer?.stop()
                 self?.alarm2AudioPlayer?.volume = 0.5
                 self?.alarm2AudioPlayer?.play()
+                
+                // Calculate and set volume for whispers based on radarDistance
+                let whispersVolume = 1.5 - (radarDistance / 95)
+                print(whispersVolume)
+                self?.whispersAudioPlayer?.volume = Float(whispersVolume)
+                self?.whispersAudioPlayer?.play()
             } else {
                 self?.alarm2AudioPlayer?.stop()
                 self?.alarm3AudioPlayer?.stop()
+                self?.whispersAudioPlayer?.stop() // Ensure that whispers stop if perturbation moves further away
                 self?.alarmAudioPlayer?.volume = 0.5
                 self?.alarmAudioPlayer?.play()
             }
