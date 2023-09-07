@@ -14,11 +14,7 @@ class RadarScene: SKScene {
     let sprite = SKSpriteNode()
     var compassHeading: CompassHeading?
     var viewModel = RadarViewModel()
-    var tapAudioPlayer: AVAudioPlayer?
-    var alarmAudioPlayer: AVAudioPlayer?
-    var alarm2AudioPlayer: AVAudioPlayer?
-    var alarm3AudioPlayer: AVAudioPlayer?
-    var whispersAudioPlayer: AVAudioPlayer?
+    var soundsModel = SoundsModel()
     var texturesModel = TexturesModel()
     var perturbation = Perturbation()
     let decibelLevelLabel = SKLabelNode(fontNamed: "Arial")
@@ -45,8 +41,8 @@ class RadarScene: SKScene {
         sprite.size = CGSize(width: 400, height: 400)
         sprite.position = CGPoint(x: 0, y: 0)
         addChild(sprite)
-
-        setupSound()
+        setupAudioSession()
+        soundsModel.setupSound()
         setupLabels()
         
         setupIdleAnimation()
@@ -57,9 +53,9 @@ class RadarScene: SKScene {
         
         let idleSequence = SKAction.sequence([
             SKAction.run { [weak self] in
-                self?.alarmAudioPlayer?.stop()
-                self?.tapAudioPlayer?.volume = 1.0
-                self?.tapAudioPlayer?.play()
+                self?.soundsModel.alarmAudioPlayer?.stop()
+                self?.soundsModel.tapAudioPlayer?.volume = 1.0
+                self?.soundsModel.tapAudioPlayer?.play()
             },
             radarAnimation,
             texturesModel.finalTexture,
@@ -69,58 +65,6 @@ class RadarScene: SKScene {
         sprite.run(SKAction.repeatForever(idleSequence))
     }
     
-    func setupSound() {
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker])
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            print("Error al configurar AVAudioSession:", error)
-        }
-
-        
-        if let tapURL = Bundle.main.url(forResource: "Tap", withExtension: "wav") {
-            do {
-                tapAudioPlayer = try AVAudioPlayer(contentsOf: tapURL)
-                alarmAudioPlayer?.enableRate = true
-            } catch {
-                print("No se pudo cargar el archivo de sonido tap.wav.")
-            }
-        }
-        
-        if let alarmURL = Bundle.main.url(forResource: "Alarm", withExtension: "wav") {
-            do {
-                alarmAudioPlayer = try AVAudioPlayer(contentsOf: alarmURL)
-            } catch {
-                print("No se pudo cargar el archivo de sonido alarm.wav.")
-            }
-        }
-        
-        if let alarm2URL = Bundle.main.url(forResource: "Alarm2", withExtension: "wav") {
-            do {
-                alarm2AudioPlayer = try AVAudioPlayer(contentsOf: alarm2URL)
-            } catch {
-                print("No se pudo cargar el archivo de sonido Alarm2.wav.")
-            }
-        }
-        
-        if let alarm3URL = Bundle.main.url(forResource: "Alarm3", withExtension: "wav") {
-            do {
-                alarm3AudioPlayer = try AVAudioPlayer(contentsOf: alarm3URL)
-            } catch {
-                print("No se pudo cargar el archivo de sonido Alarm3.wav.")
-            }
-        }
-        
-        if let whispersURL = Bundle.main.url(forResource: "Whispers", withExtension: "wav") {
-            do {
-                whispersAudioPlayer = try AVAudioPlayer(contentsOf: whispersURL)
-                whispersAudioPlayer?.numberOfLoops = -1
-            } catch {
-                print("No se pudo cargar el archivo de sonido Whispers.wav.")
-            }
-        }
-    }
     
     func setupLabels() {
         // Label Noise Control
@@ -156,8 +100,8 @@ class RadarScene: SKScene {
         }
 
         let playTapSound = SKAction.run { [weak self] in
-            self?.tapAudioPlayer?.volume = 1.0
-            self?.tapAudioPlayer?.play()
+            self?.soundsModel.tapAudioPlayer?.volume = 1.0
+            self?.soundsModel.tapAudioPlayer?.play()
         }
 
         let radarAnimation = SKAction.animate(with: texturesModel.radarTextures, timePerFrame: 0.02)
@@ -171,8 +115,8 @@ class RadarScene: SKScene {
             waitAction
         ])
         
-        whispersAudioPlayer?.stop()
-        whispersAudioPlayer?.volume = 0
+        soundsModel.whispersAudioPlayer?.stop()
+        soundsModel.whispersAudioPlayer?.volume = 0
 
         sprite.run(SKAction.repeatForever(idleSequence))
     }
@@ -184,6 +128,8 @@ class RadarScene: SKScene {
         if !viewModel.isPerturbationPositionSet && viewModel.perturbationAlreadyShowed == false {
             viewModel.isPerturbationPositionSet = true
             addChild(perturbation.entity!)
+            
+            
             perturbation.entity?.isHidden = false
         } else if !viewModel.isPerturbationPositionSet && viewModel.perturbationAlreadyShowed == true {
  
@@ -212,32 +158,36 @@ class RadarScene: SKScene {
         }
         
         let playSoundEffects = SKAction.run { [weak self] in
-            self?.tapAudioPlayer?.volume = 1.0
-            self?.tapAudioPlayer?.play()
+            self?.soundsModel.tapAudioPlayer?.volume = 1.0
+            self?.soundsModel.tapAudioPlayer?.play()
 
             let radarDistance = self?.viewModel.perturbationRadarDistance ?? 190.0
             if radarDistance <= 45 {
-                self?.alarmAudioPlayer?.stop()
-                self?.alarm2AudioPlayer?.stop()
-                self?.alarm3AudioPlayer?.volume = 0.5
-                self?.alarm3AudioPlayer?.play()
+                self?.soundsModel.alarmAudioPlayer?.stop()
+                self?.soundsModel.alarm2AudioPlayer?.stop()
+                self?.soundsModel.alarm3AudioPlayer?.volume = 0.5
+                self?.soundsModel.alarm3AudioPlayer?.play()
+                self?.perturbation.setWhiteToRedGradient()
             } else if radarDistance <= 95 {
-                self?.alarmAudioPlayer?.stop()
-                self?.alarm3AudioPlayer?.stop()
-                self?.alarm2AudioPlayer?.volume = 0.5
-                self?.alarm2AudioPlayer?.play()
+                self?.soundsModel.alarmAudioPlayer?.stop()
+                self?.soundsModel.alarm3AudioPlayer?.stop()
+                self?.soundsModel.alarm2AudioPlayer?.volume = 0.5
+                self?.soundsModel.alarm2AudioPlayer?.play()
+                self?.perturbation.entity?.particleColorSequence = nil
+                self?.perturbation.setWhiteToYellowGradient()
                 
                 // Calculate and set volume for whispers based on radarDistance
                 let whispersVolume = 1.5 - (radarDistance / 95)
                 print(whispersVolume)
-                self?.whispersAudioPlayer?.volume = Float(whispersVolume)
-                self?.whispersAudioPlayer?.play()
+                self?.soundsModel.whispersAudioPlayer?.volume = Float(whispersVolume)
+                self?.soundsModel.whispersAudioPlayer?.play()
             } else {
-                self?.alarm2AudioPlayer?.stop()
-                self?.alarm3AudioPlayer?.stop()
-                self?.whispersAudioPlayer?.stop() // Ensure that whispers stop if perturbation moves further away
-                self?.alarmAudioPlayer?.volume = 0.5
-                self?.alarmAudioPlayer?.play()
+                self?.soundsModel.alarm2AudioPlayer?.stop()
+                self?.soundsModel.alarm3AudioPlayer?.stop()
+                self?.soundsModel.whispersAudioPlayer?.stop() // Ensure that whispers stop if perturbation moves further away
+                self?.soundsModel.alarmAudioPlayer?.volume = 0.5
+                self?.soundsModel.alarmAudioPlayer?.play()
+                self?.perturbation.setWhiteToCyanGradient()
             }
         }
         
@@ -272,6 +222,15 @@ class RadarScene: SKScene {
         viewModel.$perturbationRadarDistance.sink { [weak self] _ in
             self?.updatePerturbationPosition()
         }.store(in: &cancellables)
+    }
+    
+    func setupAudioSession() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Error al configurar AVAudioSession:", error)
+        }
     }
     
    

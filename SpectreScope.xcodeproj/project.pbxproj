@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		031156C82A818DCF00A88D0F /* TexturesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031156C72A818DCF00A88D0F /* TexturesModel.swift */; };
+		03127F872AAA6A7700C341ED /* SoundsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03127F862AAA6A7700C341ED /* SoundsModel.swift */; };
 		031602D62A6886E60029E204 /* SpectreScopeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031602D52A6886E60029E204 /* SpectreScopeApp.swift */; };
 		031602D82A6886E60029E204 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031602D72A6886E60029E204 /* ContentView.swift */; };
 		031602DA2A6886E80029E204 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031602D92A6886E80029E204 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		031156C72A818DCF00A88D0F /* TexturesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TexturesModel.swift; sourceTree = "<group>"; };
+		03127F862AAA6A7700C341ED /* SoundsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsModel.swift; sourceTree = "<group>"; };
 		031602D22A6886E60029E204 /* SpectreScope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpectreScope.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		031602D52A6886E60029E204 /* SpectreScopeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectreScopeApp.swift; sourceTree = "<group>"; };
 		031602D72A6886E60029E204 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				031156C72A818DCF00A88D0F /* TexturesModel.swift */,
+				03127F862AAA6A7700C341ED /* SoundsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03AAD8E32A7C52E8007997F3 /* CompassHeading.swift in Sources */,
+				03127F872AAA6A7700C341ED /* SoundsModel.swift in Sources */,
 				0387AB2F2A97F36000A6FED4 /* Perturbation.swift in Sources */,
 				031156C82A818DCF00A88D0F /* TexturesModel.swift in Sources */,
 				031602D82A6886E60029E204 /* ContentView.swift in Sources */,
