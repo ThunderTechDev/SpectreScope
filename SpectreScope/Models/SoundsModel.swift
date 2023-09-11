@@ -14,6 +14,7 @@ class SoundsModel {
     var alarm2AudioPlayer: AVAudioPlayer?
     var alarm3AudioPlayer: AVAudioPlayer?
     var whispersAudioPlayer: AVAudioPlayer?
+    var phantomScreamAudioPlayer: AVAudioPlayer?
     
     func setupSound() {
     
@@ -22,7 +23,6 @@ class SoundsModel {
         if let tapURL = Bundle.main.url(forResource: "Tap", withExtension: "wav") {
             do {
                 tapAudioPlayer = try AVAudioPlayer(contentsOf: tapURL)
-                alarmAudioPlayer?.enableRate = true
             } catch {
                 print("No se pudo cargar el archivo de sonido tap.wav.")
             }
@@ -60,6 +60,18 @@ class SoundsModel {
                 print("No se pudo cargar el archivo de sonido Whispers.wav.")
             }
         }
+        
+        
+        if let phantomScreamURL = Bundle.main.url(forResource: "PhantomScream", withExtension: "wav") {
+            do {
+                phantomScreamAudioPlayer = try AVAudioPlayer(contentsOf: phantomScreamURL)
+            } catch {
+                print("No se pudo cargar el archivo de sonido PhantomScream.wav.")
+            }
+        }
+        
+        
+        
     }
     
     

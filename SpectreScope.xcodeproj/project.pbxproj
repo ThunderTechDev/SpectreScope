@@ -31,6 +31,8 @@
 		03EB3B342A785B9F0080CD67 /* RadarAnimation03.png in Resources */ = {isa = PBXBuildFile; fileRef = 03EB3B2F2A785B9F0080CD67 /* RadarAnimation03.png */; };
 		03EB3B352A785B9F0080CD67 /* RadarAnimation05.png in Resources */ = {isa = PBXBuildFile; fileRef = 03EB3B302A785B9F0080CD67 /* RadarAnimation05.png */; };
 		03EB3B362A785B9F0080CD67 /* RadarAnimation02.png in Resources */ = {isa = PBXBuildFile; fileRef = 03EB3B312A785B9F0080CD67 /* RadarAnimation02.png */; };
+		03FD29342AAFB2EB005246DE /* PhantomScream.wav in Resources */ = {isa = PBXBuildFile; fileRef = 03FD29332AAFB2EB005246DE /* PhantomScream.wav */; };
+		03FD29362AAFB36F005246DE /* PhantomFace.png in Resources */ = {isa = PBXBuildFile; fileRef = 03FD29352AAFB36F005246DE /* PhantomFace.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,8 @@
 		03EB3B2F2A785B9F0080CD67 /* RadarAnimation03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RadarAnimation03.png; path = Resources/RadarAnimation03.png; sourceTree = SOURCE_ROOT; };
 		03EB3B302A785B9F0080CD67 /* RadarAnimation05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RadarAnimation05.png; path = Resources/RadarAnimation05.png; sourceTree = SOURCE_ROOT; };
 		03EB3B312A785B9F0080CD67 /* RadarAnimation02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RadarAnimation02.png; path = Resources/RadarAnimation02.png; sourceTree = SOURCE_ROOT; };
+		03FD29332AAFB2EB005246DE /* PhantomScream.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PhantomScream.wav; sourceTree = "<group>"; };
+		03FD29352AAFB36F005246DE /* PhantomFace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PhantomFace.png; path = Resources/PhantomFace.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,12 +153,14 @@
 				03D0477F2A9FF814003768B7 /* Alarm3.wav */,
 				03A6696F2A79B4ED0080CC97 /* Tap.wav */,
 				03D0477C2A9FED89003768B7 /* Whispers.wav */,
+				03FD29332AAFB2EB005246DE /* PhantomScream.wav */,
 				03941BCA2A69DCAD00A0C841 /* Radar.png */,
 				03EB3B2E2A785B9F0080CD67 /* RadarAnimation01.png */,
 				03EB3B312A785B9F0080CD67 /* RadarAnimation02.png */,
 				03EB3B2F2A785B9F0080CD67 /* RadarAnimation03.png */,
 				03EB3B2D2A785B9F0080CD67 /* RadarAnimation04.png */,
 				03EB3B302A785B9F0080CD67 /* RadarAnimation05.png */,
+				03FD29352AAFB36F005246DE /* PhantomFace.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -231,8 +237,10 @@
 				03EB3B322A785B9F0080CD67 /* RadarAnimation04.png in Resources */,
 				03A669702A79B4ED0080CC97 /* Tap.wav in Resources */,
 				03EB3B352A785B9F0080CD67 /* RadarAnimation05.png in Resources */,
+				03FD29362AAFB36F005246DE /* PhantomFace.png in Resources */,
 				03D047802A9FF814003768B7 /* Alarm2.wav in Resources */,
 				031602E42A6889830029E204 /* Radar.sks in Resources */,
+				03FD29342AAFB2EB005246DE /* PhantomScream.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

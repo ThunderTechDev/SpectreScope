@@ -16,6 +16,7 @@ class RadarViewModel: ObservableObject {
     private var processSoundLevelTimer: Timer?
     @Published var perturbationAlreadyShowed = false
     @Published var averageLevel: Float
+    @Published var averageLimit: Float = -30.0
     @Published var shouldShowPerturbation: Bool = false
     @Published var initialPerturbationAngle: CGFloat?
     @Published var isPerturbationPositionSet: Bool = false
@@ -43,7 +44,7 @@ class RadarViewModel: ObservableObject {
         averageLevel = accumulatedLevels.reduce(0, +) / Float(accumulatedLevels.count)
         accumulatedLevels.removeAll()
         
-        if averageLevel < -30 {
+        if averageLevel < averageLimit {
             silenceDuration += 1
         } else {
             silenceDuration = 0

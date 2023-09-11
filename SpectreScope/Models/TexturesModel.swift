@@ -26,4 +26,10 @@ struct TexturesModel {
     lazy var finalTexture: SKAction = {
         return SKAction.setTexture(finalTextureImage)
     }()
+    
+    lazy var phantomFaceTexture: SKTexture = {
+        return SKTexture(imageNamed: "PhantomFace.png")
+    }()
+    
+    
 }

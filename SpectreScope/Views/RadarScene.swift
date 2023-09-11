@@ -147,6 +147,37 @@ class RadarScene: SKScene {
             
         }
         
+        func showGhostFaceAndScream() {
+            // 1. Mostrar la cara del fantasma
+            let phantomFaceSprite = SKSpriteNode(texture: texturesModel.phantomFaceTexture)
+            phantomFaceSprite.position = CGPoint(x: 0, y: 0)  // Suponiendo que el centro de tu escena es (0, 0)
+            phantomFaceSprite.zPosition = 10  // Esto asegura que el sprite se muestre por encima de otros nodos
+            phantomFaceSprite.size = CGSize(width: 400, height: 400) 
+            self.addChild(phantomFaceSprite)
+            
+            // 2. Reproducir el grito del fantasma
+            soundsModel.phantomScreamAudioPlayer?.play()
+            
+            // 3. Detener la reaparición de la perturbación y cualquier otra funcionalidad que desees detener
+            stopPerturbationFunctionality()  // Esta es una función hipotética. Puede que necesites crear algo similar para detener las funcionalidades asociadas con la perturbación.
+            
+            // 4. Esperar 1 segundo y luego eliminar la cara del fantasma
+            let waitAction = SKAction.wait(forDuration: 1.0)
+            let removeAction = SKAction.removeFromParent()
+            let sequenceAction = SKAction.sequence([waitAction, removeAction])
+            phantomFaceSprite.run(sequenceAction)
+            
+            // Continuar con la animación idle
+            showIdleAnimation()
+        }
+
+        
+        func stopPerturbationFunctionality() {
+            viewModel.averageLimit = -110
+            viewModel.silenceDuration = 0
+            viewModel.isPerturbationPositionSet = false
+        }
+        
         
         // 3. Define las acciones individuales.
         let fadeInPerturbation = SKAction.run { [weak self] in
@@ -157,31 +188,33 @@ class RadarScene: SKScene {
             self?.perturbation.entity?.run(SKAction.fadeOut(withDuration: 0.2))
         }
         
-        let playSoundEffects = SKAction.run { [weak self] in
+        let playDistanceEffects = SKAction.run { [weak self] in
             self?.soundsModel.tapAudioPlayer?.volume = 1.0
             self?.soundsModel.tapAudioPlayer?.play()
-
+            
             let radarDistance = self?.viewModel.perturbationRadarDistance ?? 190.0
-            if radarDistance <= 45 {
+            
+            switch radarDistance {
+                
+            case 0:
+                showGhostFaceAndScream()
+            case ..<45:
                 self?.soundsModel.alarmAudioPlayer?.stop()
                 self?.soundsModel.alarm2AudioPlayer?.stop()
                 self?.soundsModel.alarm3AudioPlayer?.volume = 0.5
                 self?.soundsModel.alarm3AudioPlayer?.play()
                 self?.perturbation.setWhiteToRedGradient()
-            } else if radarDistance <= 95 {
+            case 45..<95:
                 self?.soundsModel.alarmAudioPlayer?.stop()
                 self?.soundsModel.alarm3AudioPlayer?.stop()
                 self?.soundsModel.alarm2AudioPlayer?.volume = 0.5
                 self?.soundsModel.alarm2AudioPlayer?.play()
                 self?.perturbation.entity?.particleColorSequence = nil
                 self?.perturbation.setWhiteToYellowGradient()
-                
-                // Calculate and set volume for whispers based on radarDistance
                 let whispersVolume = 1.5 - (radarDistance / 95)
-                print(whispersVolume)
                 self?.soundsModel.whispersAudioPlayer?.volume = Float(whispersVolume)
                 self?.soundsModel.whispersAudioPlayer?.play()
-            } else {
+            default:
                 self?.soundsModel.alarm2AudioPlayer?.stop()
                 self?.soundsModel.alarm3AudioPlayer?.stop()
                 self?.soundsModel.whispersAudioPlayer?.stop() // Ensure that whispers stop if perturbation moves further away
@@ -200,7 +233,7 @@ class RadarScene: SKScene {
             fadeInPerturbation,
             radarAnimation,
             fadeOutPerturbation,
-            playSoundEffects,
+            playDistanceEffects,
             texturesModel.finalTexture,
             waitAction
         ])
