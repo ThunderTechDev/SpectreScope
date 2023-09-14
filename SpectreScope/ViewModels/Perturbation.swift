@@ -21,10 +21,8 @@ struct Perturbation {
         self.angle = angle ?? CGFloat.random(in: 0..<(2 * .pi))
         self.radarDistance = radarDistance
         self.entity = PerturbationFactory.createEmitterNode()
-        
         let x = cos(self.angle) * self.radarDistance
         let y = sin(self.angle) * self.radarDistance
-        
         self.position = CGPoint(x: x, y: y)
     }
     
@@ -35,12 +33,14 @@ struct Perturbation {
         entity?.particleLifetimeRange = 0.0
     }
     
+    
     mutating func setWhiteToYellowGradient() {
         let whiteToYellow = SKKeyframeSequence(keyframeValues: [UIColor.white, UIColor.yellow], times: [0.0, 1.0] as [NSNumber])
         entity?.particleColorSequence = whiteToYellow
         entity?.particleLifetime = 2.5
         entity?.particleLifetimeRange = 0.0
     }
+    
     
     mutating func setWhiteToRedGradient() {
         let whiteToRed = SKKeyframeSequence(keyframeValues: [UIColor.white, UIColor.red], times: [0.0, 1.0] as [NSNumber])
@@ -50,6 +50,7 @@ struct Perturbation {
     }
     
 }
+
 
 struct PerturbationFactory {
     static func createEmitterNode() -> SKEmitterNode? {

@@ -8,7 +8,6 @@
 import SwiftUI
 import AVFoundation
 
-
 class RadarViewModel: ObservableObject {
     var engine = AVAudioEngine()
     var silenceDuration: TimeInterval = 0
@@ -16,7 +15,7 @@ class RadarViewModel: ObservableObject {
     private var processSoundLevelTimer: Timer?
     @Published var perturbationAlreadyShowed = false
     @Published var averageLevel: Float
-    @Published var averageLimit: Float = -30.0
+    @Published var averageLimit: Float = -40.0
     @Published var shouldShowPerturbation: Bool = false
     @Published var initialPerturbationAngle: CGFloat?
     @Published var isPerturbationPositionSet: Bool = false
@@ -30,28 +29,25 @@ class RadarViewModel: ObservableObject {
     func startMonitoringSoundLevel() {
         let inputNode = engine.inputNode
         let outputFormat = inputNode.outputFormat(forBus: 0)
-        
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: outputFormat) { [weak self] (buffer, time) in
             guard let self = self else { return }
             let level = self.calculateLevel(in: buffer)
             self.accumulatedLevels.append(level)
         }
-        
         processSoundLevelTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(processAverageSoundLevel), userInfo: nil, repeats: true)
     }
+    
     
     @objc private func processAverageSoundLevel() {
         averageLevel = accumulatedLevels.reduce(0, +) / Float(accumulatedLevels.count)
         accumulatedLevels.removeAll()
-        
         if averageLevel < averageLimit {
             silenceDuration += 1
         } else {
             silenceDuration = 0
             isPerturbationPositionSet = false
         }
-        
-        if silenceDuration >= 15 {
+        if silenceDuration >= 60 {
             shouldShowPerturbation = true
             perturbationAlreadyShowed = true
             perturbationRadarDistance = max(perturbationRadarDistance - 5, 0)
@@ -59,9 +55,9 @@ class RadarViewModel: ObservableObject {
         } else {
             shouldShowPerturbation = false
         }
-        
         try? engine.start()
     }
+    
     
     func calculateLevel(in buffer: AVAudioPCMBuffer) -> Float {
         let channelDataValue = buffer.floatChannelData!.pointee

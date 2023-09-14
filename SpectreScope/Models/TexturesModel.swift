@@ -18,18 +18,13 @@ struct TexturesModel {
             SKTexture(imageNamed: "RadarAnimation05.png")
         ]
     }()
-    
     lazy var finalTextureImage: SKTexture = {
         return SKTexture(imageNamed: "Radar.png")
     }()
-    
     lazy var finalTexture: SKAction = {
         return SKAction.setTexture(finalTextureImage)
     }()
-    
     lazy var phantomFaceTexture: SKTexture = {
         return SKTexture(imageNamed: "PhantomFace.png")
     }()
-    
-    
 }

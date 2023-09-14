@@ -17,9 +17,7 @@ class SoundsModel {
     var phantomScreamAudioPlayer: AVAudioPlayer?
     
     func setupSound() {
-    
 
-        
         if let tapURL = Bundle.main.url(forResource: "Tap", withExtension: "wav") {
             do {
                 tapAudioPlayer = try AVAudioPlayer(contentsOf: tapURL)
@@ -61,7 +59,6 @@ class SoundsModel {
             }
         }
         
-        
         if let phantomScreamURL = Bundle.main.url(forResource: "PhantomScream", withExtension: "wav") {
             do {
                 phantomScreamAudioPlayer = try AVAudioPlayer(contentsOf: phantomScreamURL)
@@ -69,11 +66,5 @@ class SoundsModel {
                 print("No se pudo cargar el archivo de sonido PhantomScream.wav.")
             }
         }
-        
-        
-        
     }
-    
-    
-    
 }

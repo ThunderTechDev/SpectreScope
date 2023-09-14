@@ -11,15 +11,14 @@ import CoreLocation
 
 class CompassHeading: NSObject, CLLocationManagerDelegate {
     
+    let locationManager = CLLocationManager()
     var heading: Double = 0.0
     var viewModel: RadarViewModel
     var initialHeading: CLLocationDirection?
     var perturbation: Perturbation
-    let locationManager = CLLocationManager()
+    var lastHeadingChange: CLLocationDirection = 0.0
     var initialAngle: CGFloat?
     weak var scene: RadarScene?
-    
-    var lastHeadingChange: CLLocationDirection = 0.0
     
     
     init(viewModel: RadarViewModel, perturbation: Perturbation, scene: RadarScene) {
@@ -28,10 +27,10 @@ class CompassHeading: NSObject, CLLocationManagerDelegate {
         self.initialAngle = perturbation.angle
         self.scene = scene
         super.init()
-        
         locationManager.delegate = self
         setupLocationManager()
     }
+    
     
     private func setupLocationManager() {
         locationManager.requestWhenInUseAuthorization()
@@ -46,9 +45,7 @@ class CompassHeading: NSObject, CLLocationManagerDelegate {
         if initialHeading == nil {
             initialHeading = newHeading.magneticHeading
         }
-        
         lastHeadingChange = newHeading.magneticHeading - initialHeading!
-        
         if let initialAngle = self.initialAngle {
             let adjustedAngle = initialAngle + lastHeadingChange * (.pi / 180.0)
             scene?.currentPerturbationAngle = adjustedAngle
@@ -56,11 +53,10 @@ class CompassHeading: NSObject, CLLocationManagerDelegate {
         }
     }
     
+    
     func resetInitialAngle(to newAngle: CGFloat) {
         self.initialAngle = newAngle
     }
-    
-    
 }
 
 
