@@ -4,7 +4,7 @@ SpectreScope is a unique app designed to emulate the detection of a ghostly pres
 
 | SpectreScope App | 
 |:--------:|
-| !<img width="467" alt="Captura de pantalla 2023-09-18 a las 23 02 57" src="https://github.com/ThunderTechDev/SpectreScope/assets/105247375/32e17948-cc44-4a05-801f-aa2978ff8203"> |
+| !<img width="200" alt="Captura de pantalla 2023-09-18 a las 23 02 57" src="https://github.com/ThunderTechDev/SpectreScope/assets/105247375/32e17948-cc44-4a05-801f-aa2978ff8203"> |
 
 ## Features
 
