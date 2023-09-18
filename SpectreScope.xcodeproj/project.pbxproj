@@ -7,18 +7,62 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		031156C82A818DCF00A88D0F /* TexturesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031156C72A818DCF00A88D0F /* TexturesModel.swift */; };
+		03127F872AAA6A7700C341ED /* SoundsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03127F862AAA6A7700C341ED /* SoundsModel.swift */; };
 		031602D62A6886E60029E204 /* SpectreScopeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031602D52A6886E60029E204 /* SpectreScopeApp.swift */; };
 		031602D82A6886E60029E204 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031602D72A6886E60029E204 /* ContentView.swift */; };
 		031602DA2A6886E80029E204 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031602D92A6886E80029E204 /* Assets.xcassets */; };
 		031602DD2A6886E80029E204 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031602DC2A6886E80029E204 /* Preview Assets.xcassets */; };
+		031602E42A6889830029E204 /* Radar.sks in Resources */ = {isa = PBXBuildFile; fileRef = 031602E32A6889830029E204 /* Radar.sks */; };
+		0387AB2F2A97F36000A6FED4 /* Perturbation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0387AB2E2A97F36000A6FED4 /* Perturbation.swift */; };
+		03941BC92A69D6D700A0C841 /* RadarScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03941BC82A69D6D700A0C841 /* RadarScene.swift */; };
+		03941BCB2A69DCAD00A0C841 /* Radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 03941BCA2A69DCAD00A0C841 /* Radar.png */; };
+		039E590A2A8EDDAB00D5F4D4 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 039E59092A8EDDAB00D5F4D4 /* Launch Screen.storyboard */; };
+		03A6696E2A79B1490080CC97 /* Alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = 03A6696C2A79B1490080CC97 /* Alarm.wav */; };
+		03A669702A79B4ED0080CC97 /* Tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 03A6696F2A79B4ED0080CC97 /* Tap.wav */; };
+		03AAD8E12A7C4FCC007997F3 /* RadarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AAD8E02A7C4FCC007997F3 /* RadarViewModel.swift */; };
+		03AAD8E32A7C52E8007997F3 /* CompassHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AAD8E22A7C52E8007997F3 /* CompassHeading.swift */; };
+		03AE12852A706B8C00EBCBEC /* Perturbation.sks in Resources */ = {isa = PBXBuildFile; fileRef = 03AE12832A706B8C00EBCBEC /* Perturbation.sks */; };
+		03D0477D2A9FED89003768B7 /* Whispers.wav in Resources */ = {isa = PBXBuildFile; fileRef = 03D0477C2A9FED89003768B7 /* Whispers.wav */; };
+		03D047802A9FF814003768B7 /* Alarm2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 03D0477E2A9FF814003768B7 /* Alarm2.wav */; };
+		03D047812A9FF814003768B7 /* Alarm3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 03D0477F2A9FF814003768B7 /* Alarm3.wav */; };
+		03EB3B322A785B9F0080CD67 /* RadarAnimation04.png in Resources */ = {isa = PBXBuildFile; fileRef = 03EB3B2D2A785B9F0080CD67 /* RadarAnimation04.png */; };
+		03EB3B332A785B9F0080CD67 /* RadarAnimation01.png in Resources */ = {isa = PBXBuildFile; fileRef = 03EB3B2E2A785B9F0080CD67 /* RadarAnimation01.png */; };
+		03EB3B342A785B9F0080CD67 /* RadarAnimation03.png in Resources */ = {isa = PBXBuildFile; fileRef = 03EB3B2F2A785B9F0080CD67 /* RadarAnimation03.png */; };
+		03EB3B352A785B9F0080CD67 /* RadarAnimation05.png in Resources */ = {isa = PBXBuildFile; fileRef = 03EB3B302A785B9F0080CD67 /* RadarAnimation05.png */; };
+		03EB3B362A785B9F0080CD67 /* RadarAnimation02.png in Resources */ = {isa = PBXBuildFile; fileRef = 03EB3B312A785B9F0080CD67 /* RadarAnimation02.png */; };
+		03FD29342AAFB2EB005246DE /* PhantomScream.wav in Resources */ = {isa = PBXBuildFile; fileRef = 03FD29332AAFB2EB005246DE /* PhantomScream.wav */; };
+		03FD29362AAFB36F005246DE /* PhantomFace.png in Resources */ = {isa = PBXBuildFile; fileRef = 03FD29352AAFB36F005246DE /* PhantomFace.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		031156C72A818DCF00A88D0F /* TexturesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TexturesModel.swift; sourceTree = "<group>"; };
+		03127F862AAA6A7700C341ED /* SoundsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsModel.swift; sourceTree = "<group>"; };
 		031602D22A6886E60029E204 /* SpectreScope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpectreScope.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		031602D52A6886E60029E204 /* SpectreScopeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectreScopeApp.swift; sourceTree = "<group>"; };
 		031602D72A6886E60029E204 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		031602D92A6886E80029E204 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		031602DC2A6886E80029E204 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		031602E32A6889830029E204 /* Radar.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Radar.sks; sourceTree = "<group>"; };
+		0387AB2E2A97F36000A6FED4 /* Perturbation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Perturbation.swift; sourceTree = "<group>"; };
+		03941BC82A69D6D700A0C841 /* RadarScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarScene.swift; sourceTree = "<group>"; };
+		03941BCA2A69DCAD00A0C841 /* Radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Radar.png; path = Resources/Radar.png; sourceTree = SOURCE_ROOT; };
+		039E59092A8EDDAB00D5F4D4 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		03A6696C2A79B1490080CC97 /* Alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Alarm.wav; sourceTree = "<group>"; };
+		03A6696F2A79B4ED0080CC97 /* Tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tap.wav; sourceTree = "<group>"; };
+		03AAD8E02A7C4FCC007997F3 /* RadarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarViewModel.swift; sourceTree = "<group>"; };
+		03AAD8E22A7C52E8007997F3 /* CompassHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassHeading.swift; sourceTree = "<group>"; };
+		03AE12832A706B8C00EBCBEC /* Perturbation.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Perturbation.sks; sourceTree = "<group>"; };
+		03D0477C2A9FED89003768B7 /* Whispers.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Whispers.wav; sourceTree = "<group>"; };
+		03D0477E2A9FF814003768B7 /* Alarm2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Alarm2.wav; sourceTree = "<group>"; };
+		03D0477F2A9FF814003768B7 /* Alarm3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Alarm3.wav; sourceTree = "<group>"; };
+		03EB3B2D2A785B9F0080CD67 /* RadarAnimation04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RadarAnimation04.png; path = Resources/RadarAnimation04.png; sourceTree = SOURCE_ROOT; };
+		03EB3B2E2A785B9F0080CD67 /* RadarAnimation01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RadarAnimation01.png; path = Resources/RadarAnimation01.png; sourceTree = SOURCE_ROOT; };
+		03EB3B2F2A785B9F0080CD67 /* RadarAnimation03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RadarAnimation03.png; path = Resources/RadarAnimation03.png; sourceTree = SOURCE_ROOT; };
+		03EB3B302A785B9F0080CD67 /* RadarAnimation05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RadarAnimation05.png; path = Resources/RadarAnimation05.png; sourceTree = SOURCE_ROOT; };
+		03EB3B312A785B9F0080CD67 /* RadarAnimation02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RadarAnimation02.png; path = Resources/RadarAnimation02.png; sourceTree = SOURCE_ROOT; };
+		03FD29332AAFB2EB005246DE /* PhantomScream.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PhantomScream.wav; sourceTree = "<group>"; };
+		03FD29352AAFB36F005246DE /* PhantomFace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PhantomFace.png; path = Resources/PhantomFace.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +96,10 @@
 			isa = PBXGroup;
 			children = (
 				031602D52A6886E60029E204 /* SpectreScopeApp.swift */,
-				031602D72A6886E60029E204 /* ContentView.swift */,
+				03941BC42A69D63C00A0C841 /* Models */,
+				03941BC52A69D64300A0C841 /* Views */,
+				03941BC62A69D64C00A0C841 /* ViewModels */,
+				03941BC72A69D65500A0C841 /* Resources */,
 				031602D92A6886E80029E204 /* Assets.xcassets */,
 				031602DB2A6886E80029E204 /* Preview Content */,
 			);
@@ -65,6 +112,57 @@
 				031602DC2A6886E80029E204 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		03941BC42A69D63C00A0C841 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				031156C72A818DCF00A88D0F /* TexturesModel.swift */,
+				03127F862AAA6A7700C341ED /* SoundsModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		03941BC52A69D64300A0C841 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				031602D72A6886E60029E204 /* ContentView.swift */,
+				03941BC82A69D6D700A0C841 /* RadarScene.swift */,
+				031602E32A6889830029E204 /* Radar.sks */,
+				03AE12832A706B8C00EBCBEC /* Perturbation.sks */,
+				039E59092A8EDDAB00D5F4D4 /* Launch Screen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		03941BC62A69D64C00A0C841 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				03AAD8E02A7C4FCC007997F3 /* RadarViewModel.swift */,
+				03AAD8E22A7C52E8007997F3 /* CompassHeading.swift */,
+				0387AB2E2A97F36000A6FED4 /* Perturbation.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		03941BC72A69D65500A0C841 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				03A6696C2A79B1490080CC97 /* Alarm.wav */,
+				03D0477E2A9FF814003768B7 /* Alarm2.wav */,
+				03D0477F2A9FF814003768B7 /* Alarm3.wav */,
+				03A6696F2A79B4ED0080CC97 /* Tap.wav */,
+				03D0477C2A9FED89003768B7 /* Whispers.wav */,
+				03FD29332AAFB2EB005246DE /* PhantomScream.wav */,
+				03941BCA2A69DCAD00A0C841 /* Radar.png */,
+				03EB3B2E2A785B9F0080CD67 /* RadarAnimation01.png */,
+				03EB3B312A785B9F0080CD67 /* RadarAnimation02.png */,
+				03EB3B2F2A785B9F0080CD67 /* RadarAnimation03.png */,
+				03EB3B2D2A785B9F0080CD67 /* RadarAnimation04.png */,
+				03EB3B302A785B9F0080CD67 /* RadarAnimation05.png */,
+				03FD29352AAFB36F005246DE /* PhantomFace.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,8 +223,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03A6696E2A79B1490080CC97 /* Alarm.wav in Resources */,
+				03AE12852A706B8C00EBCBEC /* Perturbation.sks in Resources */,
 				031602DD2A6886E80029E204 /* Preview Assets.xcassets in Resources */,
+				03EB3B332A785B9F0080CD67 /* RadarAnimation01.png in Resources */,
+				03EB3B362A785B9F0080CD67 /* RadarAnimation02.png in Resources */,
 				031602DA2A6886E80029E204 /* Assets.xcassets in Resources */,
+				03D047812A9FF814003768B7 /* Alarm3.wav in Resources */,
+				03D0477D2A9FED89003768B7 /* Whispers.wav in Resources */,
+				039E590A2A8EDDAB00D5F4D4 /* Launch Screen.storyboard in Resources */,
+				03941BCB2A69DCAD00A0C841 /* Radar.png in Resources */,
+				03EB3B342A785B9F0080CD67 /* RadarAnimation03.png in Resources */,
+				03EB3B322A785B9F0080CD67 /* RadarAnimation04.png in Resources */,
+				03A669702A79B4ED0080CC97 /* Tap.wav in Resources */,
+				03EB3B352A785B9F0080CD67 /* RadarAnimation05.png in Resources */,
+				03FD29362AAFB36F005246DE /* PhantomFace.png in Resources */,
+				03D047802A9FF814003768B7 /* Alarm2.wav in Resources */,
+				031602E42A6889830029E204 /* Radar.sks in Resources */,
+				03FD29342AAFB2EB005246DE /* PhantomScream.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +251,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03AAD8E32A7C52E8007997F3 /* CompassHeading.swift in Sources */,
+				03127F872AAA6A7700C341ED /* SoundsModel.swift in Sources */,
+				0387AB2F2A97F36000A6FED4 /* Perturbation.swift in Sources */,
+				031156C82A818DCF00A88D0F /* TexturesModel.swift in Sources */,
 				031602D82A6886E60029E204 /* ContentView.swift in Sources */,
+				03AAD8E12A7C4FCC007997F3 /* RadarViewModel.swift in Sources */,
 				031602D62A6886E60029E204 /* SpectreScopeApp.swift in Sources */,
+				03941BC92A69D6D700A0C841 /* RadarScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,11 +390,14 @@
 				DEVELOPMENT_TEAM = 6Z3S569SKT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Se utiliza la localización para conocer la orientación del móvil y ubicar las perturbaciones";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "El microfono se usa para captar el nivel de sonido del ambiente";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -282,9 +405,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thundertech.SpectreScope;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -299,11 +425,14 @@
 				DEVELOPMENT_TEAM = 6Z3S569SKT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Se utiliza la localización para conocer la orientación del móvil y ubicar las perturbaciones";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "El microfono se usa para captar el nivel de sonido del ambiente";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -311,9 +440,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thundertech.SpectreScope;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
